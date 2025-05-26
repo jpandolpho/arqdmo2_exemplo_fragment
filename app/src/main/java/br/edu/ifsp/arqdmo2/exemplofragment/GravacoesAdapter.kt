@@ -35,6 +35,6 @@ class GravacoesAdapter(private val arquivos: List<File>) :
 
     inner class GravacaoViewHolder(itemView: View) :
         RecyclerView.ViewHolder(itemView) {
-        val titulo: TextView = itemView.findViewById(android.R.id.txtTitulo)
+        val titulo: TextView = itemView.findViewById(android.R.id.text1)
     }
 }

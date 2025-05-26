@@ -23,7 +23,7 @@ class GravacaoFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        adapter = GravacoesAdapter(gravacoes)
+        adapter = GravacoesAdapter(mutableListOf())
         binding.recyclerRecordings.layoutManager =
             LinearLayoutManager(requireContext())
         binding.recyclerRecordings.adapter = adapter

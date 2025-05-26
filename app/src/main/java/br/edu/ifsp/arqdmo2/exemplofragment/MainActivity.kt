@@ -38,14 +38,14 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
+/*
     private fun temPermissoesNecessarias(): Boolean {
         return PERMISSOES_REQUERIDAS.all {
             ContextCompat.checkSelfPermission(this, it) ==
                     PackageManager.PERMISSION_GRANTED
         }
     }
-
+*/
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
