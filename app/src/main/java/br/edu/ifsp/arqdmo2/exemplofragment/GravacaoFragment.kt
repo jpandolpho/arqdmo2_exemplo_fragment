@@ -39,6 +39,7 @@ class GravacaoFragment : Fragment(), GravacaoHelper.Callback {
                 isGravando = true
             } else {
                 gravacaoHelper.pararGravacao()
+                isGravando = false
             }
         }
         carregarGravacoes()
