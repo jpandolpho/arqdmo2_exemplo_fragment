@@ -18,8 +18,7 @@ class GravacoesAdapter(private val arquivos: List<File>) :
         return GravacaoViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: GravacaoViewHolder, position: Int)
-    {
+    override fun onBindViewHolder(holder: GravacaoViewHolder, position: Int) {
         val arquivo = arquivos[position]
         holder.titulo.text = arquivo.name
         holder.itemView.setOnClickListener {

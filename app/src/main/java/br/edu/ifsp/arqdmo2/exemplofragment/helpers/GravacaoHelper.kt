@@ -9,13 +9,16 @@ class GravacaoHelper(
     private val context: Context,
     private val callback: Callback
 ) {
+
     interface Callback {
         fun onGravacaoIniciada()
         fun onGravacaoFinalizada(arquivo: File)
         fun onErroGravacao(mensagem: String)
     }
+
     private var mediaRecorder: MediaRecorder? = null
     private var arquivo: File? = null
+
     fun iniciarGravacao(nomeArquivo: String) {
         if (nomeArquivo.isBlank()) {
             callback.onErroGravacao("Nome do arquivo não pode ser vazio.")
@@ -41,6 +44,7 @@ class GravacaoHelper(
             callback.onErroGravacao("Erro ao gravar: ${e.message}")
         }
     }
+
     fun pararGravacao() {
         try {
             mediaRecorder?.apply {

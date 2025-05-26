@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import br.edu.ifsp.arqdmo2.exemplofragment.databinding.FragmentExerciciosBinding
 import br.edu.ifsp.arqdmo2.exemplofragment.helpers.ReconhecimentoHelper
@@ -12,27 +11,34 @@ import br.edu.ifsp.arqdmo2.exemplofragment.helpers.ReconhecimentoHelper
 class ExerciciosFragment : Fragment(), ReconhecimentoHelper.Callback {
     private lateinit var binding: FragmentExerciciosBinding
     private lateinit var reconhecimentoHelper: ReconhecimentoHelper
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentExerciciosBinding.inflate(inflater, container,
-            false)
+        binding = FragmentExerciciosBinding.inflate(
+            inflater, container,
+            false
+        )
         return binding.root
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         reconhecimentoHelper = ReconhecimentoHelper(requireContext(), this)
         binding.buttonSpeak.setOnClickListener {
             reconhecimentoHelper.iniciarReconhecimento("en-US")
         }
     }
+
     override fun onReconhecimentoFinalizado(texto: String?) {
         binding.textInput.text = texto
         compararTranscricao(texto ?: "")
     }
+
     override fun onErroReconhecimento(mensagem: String) {
         binding.textFeedback.text = mensagem
     }
+
     private fun compararTranscricao(transcricao: String) {
         val original =
             binding.exerciseText.text.toString().trim().lowercase()
@@ -44,6 +50,7 @@ class ExerciciosFragment : Fragment(), ReconhecimentoHelper.Callback {
         }
         binding.textFeedback.text = feedback
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         reconhecimentoHelper.liberar()

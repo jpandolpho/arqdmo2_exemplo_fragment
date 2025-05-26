@@ -15,6 +15,7 @@ class MainActivity : AppCompatActivity() {
         Manifest.permission.RECORD_AUDIO
     )
     private val REQUEST_PERMISSION_CODE = 101
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -26,7 +27,8 @@ class MainActivity : AppCompatActivity() {
             ActivityCompat.requestPermissions(
                 this,
                 PERMISSOES_REQUERIDAS,
-                REQUEST_PERMISSION_CODE)
+                REQUEST_PERMISSION_CODE
+            )
         }
         binding.bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
@@ -36,36 +38,41 @@ class MainActivity : AppCompatActivity() {
                         .commit()
                     true
                 }
+
                 R.id.nav_gravacoes -> {
                     supportFragmentManager.beginTransaction()
-                        .replace(R.id.container_fragment, GravacoesFragment())
+                        .replace(R.id.container_fragment, GravacaoFragment())
                         .commit()
                     true
                 }
+
                 else -> false
             }
         }
     }
+
     private fun temPermissoesNecessarias(): Boolean {
         return PERMISSOES_REQUERIDAS.all {
             ContextCompat.checkSelfPermission(this, it) ==
                     PackageManager.PERMISSION_GRANTED
         }
     }
+
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
         grantResults: IntArray
     ) {
-        super.onRequestPermissionsResult(requestCode, permissions,
-            grantResults)
+        super.onRequestPermissionsResult(
+            requestCode, permissions,
+            grantResults
+        )
         if (requestCode == REQUEST_PERMISSION_CODE) {
-            if (grantResults.any { it != PackageManager.PERMISSION_GRANTED })
-            {
+            if (grantResults.any { it != PackageManager.PERMISSION_GRANTED }) {
                 Toast.makeText(
                     this,
                     "Permissões necessárias não concedidas. O app pode não funcionar corretamente.",
-                            Toast.LENGTH_LONG
+                    Toast.LENGTH_LONG
                 ).show()
             }
         }
