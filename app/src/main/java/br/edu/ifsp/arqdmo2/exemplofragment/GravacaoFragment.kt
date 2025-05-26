@@ -36,10 +36,8 @@ class GravacaoFragment : Fragment(), GravacaoHelper.Callback {
         binding.btnRecord.setOnClickListener {
             if (!isGravando) {
                 gravacaoHelper.iniciarGravacao(binding.etTituloGravacao.text.toString())
-                isGravando = true
             } else {
                 gravacaoHelper.pararGravacao()
-                isGravando = false
             }
         }
         carregarGravacoes()
@@ -57,12 +55,14 @@ class GravacaoFragment : Fragment(), GravacaoHelper.Callback {
     override fun onGravacaoIniciada() {
         binding.textStatus.text = "Gravando..."
         binding.btnRecord.text = "Parar Gravação"
+        isGravando = true
     }
 
     override fun onGravacaoFinalizada(arquivo: File) {
         binding.textStatus.text = "Gravação salva: ${arquivo.name}"
         binding.btnRecord.text = "Iniciar Gravação"
         carregarGravacoes()
+        isGravando = false
     }
 
     override fun onErroGravacao(mensagem: String) {
